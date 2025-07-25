@@ -124,9 +124,7 @@ if st.session_state.current_page == "dialogue":
 
     # サイドバーにターン進捗を表示
     with st.sidebar:
-        st.markdown(f"### 実験の進度")
-        st.progress(2 / 5)
-        st.markdown(f"### 対話セッションの進捗")
+        st.markdown(f"### 対話セッションの進度")
         st.progress((st.session_state.counselor_turn + 1) / len(scenario_data))
         st.markdown(f"**{st.session_state.counselor_turn + 1} / {len(scenario_data)} ターン**")
     
@@ -197,9 +195,14 @@ if st.session_state.current_page == "dialogue":
     
     # 23ターン終了
     else:
+        time.sleep(1)
         st.success("これで対話セッションは終了です。")
         if st.button("説明に戻る"):
             st.session_state.current_page = "description"
+            st.session_state.counselor_turn = 0
+            st.session_state.messages_for_counselor = []
+            st.session_state.dialogue_history = []
+            st.session_state.deviation_history = []
             st.rerun()
 
 else:

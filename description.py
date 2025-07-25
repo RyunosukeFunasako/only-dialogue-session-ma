@@ -1,5 +1,4 @@
 import streamlit as st
-import time
 
 st.title("実験の手順")
 st.markdown("""
