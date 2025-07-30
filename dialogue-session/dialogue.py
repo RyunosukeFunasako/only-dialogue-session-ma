@@ -183,13 +183,14 @@ if st.session_state.current_page == "dialogue":
     
     # 被験者の入力（23ターン目は入力を求めない）
     if st.session_state.counselor_turn < len(scenario_data) - 1:
-        if prompt := st.chat_input("あなたの返答を入力してください。", key=f"chat_input_{len(st.session_state.dialogue_history)}"):
-            st.session_state.dialogue_history.append({"role": "user", "content": prompt})
-            # 入力を表示
+        with st.form("chat_form", clear_on_submit=True):
+            user_input = st.text_input("あなたの返答を入力してください", key="chat_input")
+            submitted = st.form_submit_button("送信")
+
+        if submitted and user_input:
+            st.session_state.dialogue_history.append({"role": "user", "content": user_input})
             with st.chat_message("user"):
-                st.markdown(prompt)
-            
-            # 次のターンに進む
+                st.markdown(user_input)
             st.session_state.counselor_turn += 1
             st.rerun()
     
