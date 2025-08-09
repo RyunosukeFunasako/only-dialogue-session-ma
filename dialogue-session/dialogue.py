@@ -111,7 +111,7 @@ if st.session_state.current_page == "dialogue":
 
     openai = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
     model = "gpt-4o-mini"
-    scenario_file = "dialogue-session/counselor_scenario_ver2.json"
+    scenario_file = "dialogue-session/counselor_scenario.json"
 
     if "counselor_turn" not in st.session_state:
         st.session_state.counselor_turn = 0
