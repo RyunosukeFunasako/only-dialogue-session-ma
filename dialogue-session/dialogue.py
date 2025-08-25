@@ -40,15 +40,15 @@ def generate_counselor_message(counselor_scenario_message, dialogue_history, ope
 def check_generated_message(counselor_reply, counselor_scenario_message):
     check_prompt = f"""
 # 命令書：
-あなたはカウンセラーエージェントの発話を管理するエージェントです。
-制約条件をもとにカウンセラーが生成した発話が、発話シナリオの内容を含んでいるかを評価してください。
+あなたはカウンセラーエージェントが生成した発話を管理するエージェントです。
+カウンセラーエージェントは、発話シナリオに沿った発話を行わなければなりません。
+制約条件をもとにカウンセラーエージェントが生成した発話が、発話シナリオの内容を含んでいるかを評価してください。
 
 # 制約条件：
 - 生成された発話に発話シナリオの内容が含まれていることを確認する。
 - 発話シナリオに含まれる説明が省略されていないか確認する。
-  - 例：アジェンダや自動思考、認知再構成の説明が省略されていないか確認する。
+  - 例：アジェンダ、認知行動療法の進め方、自動思考、認知再構成の説明が省略されていないか確認する。
 - 発話シナリオに含まれない質問や提案をしていないか確認する。
-- 相槌や表現の違いは気にしない。
 - 直前の患者の返答に対する繰り返し（言い換え）や共感的な声かけが追加されていることは問題ない。
 """
     # 評価結果はboolで返す
@@ -62,9 +62,9 @@ def check_generated_message(counselor_reply, counselor_scenario_message):
             {
                 "role": "user",
                 "content": f"""
-以下はカウンセラーが生成した発話と発話シナリオです。
+以下はカウンセラーエージェントが生成した発話と発話シナリオです。
 
-# カウンセラーの発話：
+# カウンセラーエージェントの発話：
 {counselor_reply}
 
 # 発話シナリオ：
@@ -77,11 +77,11 @@ def check_generated_message(counselor_reply, counselor_scenario_message):
                 "type": "function",
                 "function": {
                     "name": "check_generated_message",
-                    "description": "カウンセラーの発話が発話シナリオの内容を含んでいるかを評価する",
+                    "description": "カウンセラーエージェントの発話が発話シナリオの内容を含んでいるかを評価する",
                     "parameters": {
                         "type": "object",
                         "properties": {
-                            "result": {"type": "boolean", "description": "カウンセラーの発話が発話シナリオの内容を含んでいるかを評価する"},
+                            "result": {"type": "boolean", "description": "カウンセラーエージェントの発話が発話シナリオの内容を含んでいるかを評価する"},
                         }
                     },
                     "required": [
