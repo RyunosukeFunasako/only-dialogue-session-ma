@@ -7,5 +7,5 @@ st.markdown("""
 """)
 
 if st.button("対話セッションを始める"):
-    st.session_state.current_page = "dialogue"
+    st.session_state.current_page = "attention"
     st.rerun()

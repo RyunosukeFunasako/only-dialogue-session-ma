@@ -1,6 +1,7 @@
 import streamlit as st
 
 description_page = st.Page("description.py", title="実験の説明", icon="✅")
+attention_page = st.Page("attention.py", title="対話セッションを始める前に", icon="👀")
 dialogue_page = st.Page("dialogue-session/dialogue.py", title="対話セッション", icon="👩‍⚕️")
 
 if "current_page" not in st.session_state:
@@ -16,6 +17,8 @@ if "deviation_history" not in st.session_state:
 
 if st.session_state.current_page == "description":
     pg = st.navigation([description_page])
+elif st.session_state.current_page == "attention":
+    pg = st.navigation([attention_page])
 elif st.session_state.current_page == "dialogue":
     pg = st.navigation([dialogue_page])
 

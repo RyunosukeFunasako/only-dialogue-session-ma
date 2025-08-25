@@ -146,9 +146,9 @@ if st.session_state.current_page == "dialogue":
                 counselor_reply = counselor_scenario_message
             # 2ターン目以降はカウンセラーエージェントの発話を生成
             else:
-                # 3回までは再生成する
+                # 2回までは生成する
                 retry_count = 0
-                max_retries = 3
+                max_retries = 2
                 while retry_count < max_retries:
                     counselor_reply = generate_counselor_message(counselor_scenario_message, st.session_state.dialogue_history, openai, model, st.session_state.counselor_turn, scenario_data)
                     # チェックはboolが返ってくるまで何回でも行う
