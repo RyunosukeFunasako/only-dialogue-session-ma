@@ -28,7 +28,7 @@ def generate_counselor_message(counselor_scenario_message, dialogue_history, ope
 {json.dumps(scenario_data, ensure_ascii=False, indent=2)}
 """
     # カウンセラーのメッセージリストを更新（対話履歴を更新）
-    messages_for_counselor = [{"role": "system", "content": counselor_message_prompt}] + dialogue_history[1:]
+    messages_for_counselor = [{"role": "system", "content": counselor_message_prompt}] + dialogue_history
 
     counselor_response = openai.chat.completions.create(
         model=model,
