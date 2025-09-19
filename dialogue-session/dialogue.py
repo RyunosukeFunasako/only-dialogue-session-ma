@@ -12,8 +12,8 @@ def generate_counselor_message(counselor_scenario_message, dialogue_history, ope
 
 # 制約条件：
 - 基本的に発話シナリオに沿って、自然な発話を生成する。
-- 発話の冒頭で患者の返答に対する繰り返し（言い換え）や共感的な声かけを1文で簡潔に行う。
-  - 例：「〇〇ということですね。」「それは〇〇ですね。」
+- 患者が困り事、状況、気分、考えを述べた場合は、発話の冒頭で患者の返答に対する繰り返し（言い換え）や共感的な声かけを1文で簡潔に行う。
+  - 例：「〇〇ということですね。」「それはつらかったですね。」
 - 各ターンの発話シナリオの内容は生成する発話に必ず含める。
 - 発話シナリオに含まれる説明や具体例は省略しない。
 - 発話シナリオに含まれない説明や質問、提案はしない。
@@ -151,9 +151,9 @@ if st.session_state.current_page == "dialogue":
                 counselor_reply = counselor_scenario_message
             # 2ターン目以降はカウンセラーエージェントの発話を生成
             else:
-                # 2回までは生成する
+                # 3回までは生成する
                 retry_count = 0
-                max_retries = 2
+                max_retries = 3
                 while retry_count < max_retries:
                     # 直前の患者の発話
                     previous_user_message = st.session_state.dialogue_history[-1]["content"]
